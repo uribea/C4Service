@@ -52,6 +52,7 @@ function testNew1() {
     assertTrue(sizeof($strategies) > 0, "$TAG-1");
     foreach ($strategies as $s) {
         $response = visitNew($s);
+        echo($s);
         checkNewResponse($response, true, "$TAG-2");
     }
 }
@@ -65,6 +66,7 @@ function testNew2() {
 /** Test: unknown strategy. */
 function testNew3() {
     $response = visitNew('Strategy' . uniqid());
+    //echo($response);
     checkNewResponse($response, false, "N3");
 }
 
@@ -187,10 +189,13 @@ function visitNew($strategy = null) {
     if (!is_null($strategy)) {
         $query = '?strategy=' . $strategy;
     }
+    //echo($home . "/new/index.php" . $query.'__________________________________________________________');
     return @file_get_contents($home . "/new/index.php" . $query);
 }
 
 function checkNewResponse($response, $expected, $msg) {
+    //echo ($response.'___');
+    //echo($expected);
     if ($response) {
         $json = json_decode($response);
         if ($json != null) {
@@ -203,6 +208,8 @@ function checkNewResponse($response, $expected, $msg) {
             return;
         }
     }
+    echo ($response);
+    echo($expected);
     fail($msg);
 }
 
