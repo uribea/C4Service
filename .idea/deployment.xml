@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="C4">
+    <serverData>
+      <paths name="C4">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/src" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

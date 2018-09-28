@@ -6,7 +6,7 @@
 // set to the base address (URL) of your Connect Four web service
 //$home = "http://cs3360.cs.utep.edu/<ur-account>/";
 //$home = "http://www.cs.utep.edu/cheon/cs3360/project/c4/";
-$home = "http://localhost:8000/";
+$home = "http://localhost:8080";
 
 $strategies = array(); // strategies supported by the web service under test
 $numOfSlots = 7;  // number of slots supported by the service under test
