@@ -11,12 +11,13 @@ class Random extends Board
 
     function rand_pos($player)
     {
-        $col= rand(0,7);
-        while ($this->valid_pos($col)==0)
+        $c= rand(0,7);
+        $r=rand(0,6);
+        while ($this->valid_pos($c)==0)
         {
-            $col=rand(0,7);
+            $c=rand(0,7);
         }
-        $this->update($col,$player);
+        $this->update($c,$player,$r);
     }
 
 }
