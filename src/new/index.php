@@ -42,11 +42,15 @@ if(!$response){
 $strategy = $json[STRATEGY];
 $game= new Game($strategy);
 $pid = uniqid();
-//    $file = DATA_DIR . $pid . DATA_EXT;
-//if (storeState($file, $game->toJsonString())) {
+define('DATA_DIR','../written');
+define('DATA_EXT','.txt');
+
+
+$file = DATA_DIR . $pid . DATA_EXT;
+ if (storeState($file, $game->toJsonString())) {
     echo json_encode(array(RESPONSE => true, PID => $pid));
-//} else {
-//    echo createResponse("Failed to store game data");
-//}
+} else {
+    echo createResponse("Failed to store game data");
+}
 
 ?>

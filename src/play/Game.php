@@ -9,5 +9,8 @@ class Game{
     function Game($strategy){
 
     }
+    function toJsonString(){
+
+    }
 }
 ?>
