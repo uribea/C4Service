@@ -1,0 +1,6 @@
+<?php
+echo "Hello My Friends";
+if(3>2) {
+    echo "YUP";
+}
+?>

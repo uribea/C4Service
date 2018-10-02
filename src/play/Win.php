@@ -23,24 +23,52 @@ class Win
             $board[r*col]=player;
         }
 
+        return $c1;
 
+    }
+
+    function diagonal1($r,$c,$player)
+    {
+        $total=0;
+        if(c+3<7&&c-3>=0)
+        {
+            for($i=0;i<5;$i++)
+            {
+                if((r*col)-(6+i)==player)
+                {
+                    $total++;
+                }
+            }
+
+        }
+        return $total;
+    }
+
+    function diagonal2($r,$c,$player)
+    {
+        $total=0;
+        if(c+3<6&&c-3>=7)
+        {
+            for($i=0;i<5;$i++)
+            {
+                if((r*col)-(6+i)==player)
+                {
+                    $total++;
+                }
+            }
+
+        }
+        return $total;
 
     }
 
-    function diagonal1()
+    function horizontal($r,$c,$player)
     {
 
     }
-    function diagonal2()
+
+    function vertical($r,$c,$player)
     {
 
-    }
-    function horizontal()
-    {
-
-    }
-    function vertical()
-    {
-        
     }
 }

@@ -15,8 +15,12 @@ class Smart extends Board
 
 
     }
-
     function defence()
+    {
+
+    }
+
+    function offence()
     {
 
     }
