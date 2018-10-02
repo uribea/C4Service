@@ -1,27 +1,52 @@
 <?php // index.php
-//**
-define('STRATEGY', 'strategy'); // constant
+
+require_once '../common/constants.php';
+require_once '../common/utils.php';
+require_once '../play/Game.php';
+
+/**
+
 define('UID', 'pid');
-$strategies = array("Smart", "Random"); // supported strategies
+$response;
+$reason;
 
-if (!array_key_exists(STRATEGY, $_GET)) { echo'{"response": false, "reason": "Strategy not specified"}'; exit; }
-elseif (!(in_array($strategies[0],$_GET) xor in_array($strategies[1],$_GET))) {
-    echo'{"response": false, "reason": "Unknown Strategy"}'; exit; }
 
-//$strategy = $_GET[STRATEGY];
-// write your code here … use uniqid() to create a unique play id.
-//$UI = uniqid();
 $UID = uniqid();
 echo'{"response": true, "pid": "'.$UID.'"}';
-/**
-$strategy = 'smart';
+**/
+define('STRATEGY', 'strategy'); // constant
+define('PID','pid');
+define('RESPONSE','response');
+define('REASON', 'reason');
+$strategies = array("Smart", "Random"); // supported strategies
+$response = true;
+$reason = '';
+$json = $_GET;
+//print_r($_GET);
+
+//echo $strategies;
+if (!array_key_exists(STRATEGY, $json)) {
+    $response = false;
+    $reason = 'Strategy not specified';
+}
+
+elseif (!(in_array($strategies[0],$_GET) xor in_array($strategies[1],$_GET))) {
+    $response = false;
+    $reason = 'Unknown Strategy';
+}
+
+if(!$response){
+    echo json_encode(array(RESPONSE => $response, REASON => $reason ));
+    exit;
+}
+$strategy = $json[STRATEGY];
 $game= new Game($strategy);
 $pid = uniqid();
-//$file = DATA_DIR . $pid . DATA_EXT;
-if (true)storeState($file, $game->toJsonString())) {
-    echo json_encode(array("response" => true, PID => $pid));
-} else {
-    echo createResponse("Failed to store game data");
-}
- **/
+//    $file = DATA_DIR . $pid . DATA_EXT;
+//if (storeState($file, $game->toJsonString())) {
+    echo json_encode(array(RESPONSE => true, PID => $pid));
+//} else {
+//    echo createResponse("Failed to store game data");
+//}
+
 ?>

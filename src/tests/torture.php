@@ -208,8 +208,8 @@ function checkNewResponse($response, $expected, $msg) {
             return;
         }
     }
-    echo ($response);
-    echo($expected);
+    echo ($response).PHP_EOL;
+    echo 'exp'.($expected).PHP_EOL;
     fail($msg);
 }
 
