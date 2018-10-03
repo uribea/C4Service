@@ -40,7 +40,7 @@ if(!$response){
 }
 
 $strategy = $json[STRATEGY];
-$game= new Game();
+$game= new Game($strategy);
 $pid = uniqid();
 
 $file = DATA_DIR . $pid . DATA_EXT;

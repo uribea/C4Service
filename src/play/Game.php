@@ -9,7 +9,7 @@ class Game{
     public $board;
     public $strategy;
 
-    function Game(){
+    function Game($strategy){
 
     }
     function toJsonString(){
