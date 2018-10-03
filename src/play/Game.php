@@ -6,6 +6,9 @@
  * Time: 6:08 PM
  */
 class Game{
+    public $board;
+    public $strategy;
+
     function Game(){
 
     }
@@ -13,6 +16,16 @@ class Game{
         return json_encode();
     }
 
-
+    static function fromJsonString($json) {
+        $obj = json_decode($json); // instance of stdClass
+        $strategy = $obj->{'strategy'};
+        $board = $obj->{'board'};
+        $game = new Game();
+        $game->board = Board::fromJson($board);
+        $name = $strategy->{'name'};
+        $game->strategy = $name::fromJson($strategy);
+        $game->strategy->board = $game->board;
+        return $game;
+    }
 }
 ?>
