@@ -4,16 +4,12 @@
  * User: fantm
  * Date: 9/28/18
  * Time: 6:08 PM
+ * */
+function storeState($file,$json){
+    return True;
+}
 
-class utils
-{
-
-    function constants()
-    {
-        define('DATA_DIR', 'dira');
-        define('DATA_EXT', 'extaa');
-
-        // return 4;
-    }
-}*/
-//?>
+function createResponse($reason){
+    return json_encode(array(RESPONSE => False, REASON => $reason ));
+}
+?>

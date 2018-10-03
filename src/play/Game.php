@@ -6,11 +6,13 @@
  * Time: 6:08 PM
  */
 class Game{
-    function Game($strategy){
+    function Game(){
 
     }
     function toJsonString(){
-
+        return json_encode();
     }
+
+
 }
 ?>

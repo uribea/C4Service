@@ -14,10 +14,7 @@ $reason;
 $UID = uniqid();
 echo'{"response": true, "pid": "'.$UID.'"}';
 **/
-define('STRATEGY', 'strategy'); // constant
-define('PID','pid');
-define('RESPONSE','response');
-define('REASON', 'reason');
+
 $strategies = array("Smart", "Random"); // supported strategies
 $response = true;
 $reason = '';
@@ -36,15 +33,15 @@ elseif (!(in_array($strategies[0],$_GET) xor in_array($strategies[1],$_GET))) {
 }
 
 if(!$response){
-    echo json_encode(array(RESPONSE => $response, REASON => $reason ));
+    //echo json_encode(array(RESPONSE => $response, REASON => $reason ));
+    echo createResponse($reason);
+
     exit;
 }
-$strategy = $json[STRATEGY];
-$game= new Game($strategy);
-$pid = uniqid();
-define('DATA_DIR','../written');
-define('DATA_EXT','.txt');
 
+$strategy = $json[STRATEGY];
+$game= new Game();
+$pid = uniqid();
 
 $file = DATA_DIR . $pid . DATA_EXT;
  if (storeState($file, $game->toJsonString())) {
