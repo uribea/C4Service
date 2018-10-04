@@ -5,10 +5,11 @@
  * Date: 10/2/18
  * Time: 11:31 AM
  */
+require_once (Board.php);
 
 class Move
 {
-    function update($c,$player,$r)//you give a column, row and a player
+    function update_board($c,$player,$r)//you give a column, row and a player
     {
         if($this->valid_pos(r)==1)
         {

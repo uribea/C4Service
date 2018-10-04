@@ -5,29 +5,11 @@
  * Date: 10/2/18
  * Time: 11:25 AM
  */
+require_once (Win.php);
+require_once (Move.php);
 
-abstract class Strategy
+abstract class Strategy extends Board
 {
-    var $board;
-
-    function __construct(Board $board = null) {
-        $this->board = $board;
-    }
-
-    abstract function pickSlot();
-
-    function toJason() {
-        return array(‘name’ => get_class($this));
-    }
-
-    static function fromJson($obj) {
-        $strategy = new static();
-        return $strategy;
-    }
-
-    function move()
-    {
-
-    }
+    abstract function move($player);
 
 }

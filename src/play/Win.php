@@ -5,70 +5,49 @@
  * Date: 10/1/18
  * Time: 4:53 PM
  */
-
+require_once (Board.php);
 class Win
 {
-    function count_win($r,$c,$player)
+    //checks if a slot has connected 5 or not
+    function check_win($row,$col,$player)
     {
-        $c1=0;
-        $c2=0;
-        $c3=0;
-        $c4=0;
-        if(board[col*r]==1||board[col*r]==2)//if position i not available
+        $height=7;
+        $width=6;
+        $empty_slot=0;
+        $player;
+        if(board[(row*height)-1]==0)
         {
-            return $c1;
+            return 0;//returns 0 because 0 is not a player
         }
-        if(board[col*r]==0)//if 0 then
+        //checks for right
+        if($col+3<$width&&$player==board[(row*height)+1]&&$player==board[(row*height)+1]&&
+        $player==board[(row*height)+1])
         {
-            $board[r*col]=player;
+            return $player;
         }
-
-        return $c1;
-
-    }
-
-    function diagonal1($r,$c,$player)
-    {
-        $total=0;
-        if(c+3<7&&c-3>=0)
+        //checks up and right
+        if(col+2<$width&&$player==board[row*height-5]&&$player==board[row*height-10]&&
+            $player==board[row*height-15])
         {
-            for($i=0;i<5;$i++)
-            {
-                if((r*col)-(6+i)==player)
-                {
-                    $total++;
-                }
-            }
-
+            return $player;
         }
-        return $total;
-    }
-
-    function diagonal2($r,$c,$player)
-    {
-        $total=0;
-        if(c+3<6&&c-3>=7)
+        //checks up
+        if((col+2<$height&&$player==board[row*height-6]&&$player==board[row*height-12]&&
+            $player==board[row*height-18]))
         {
-            for($i=0;i<5;$i++)
-            {
-                if((r*col)-(6+i)==player)
-                {
-                    $total++;
-                }
-            }
-
+            return $player;
         }
-        return $total;
+        //look up and left
+        if((col-2<0&&$player==board[row*height-6]&&$player==board[row*height-12]&&
+            $player==board[row*height-18]))
+        {
+            return $player;
+        }
+
+
+        return 0;
 
     }
+    
 
-    function horizontal($r,$c,$player)
-    {
-
-    }
-
-    function vertical($r,$c,$player)
-    {
-
-    }
 }
