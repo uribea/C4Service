@@ -14,10 +14,10 @@ class Board
     public $col=6;
     //var $total=42;
 
-    function  __construct()
-    {
-        $this->board=array_fill(0,42,0);
-    }
+     function  __construct()
+     {
+         $this->board=array_fill(0,42,0);
+     }
 
 
 
