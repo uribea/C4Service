@@ -52,7 +52,7 @@ function testNew1() {
     assertTrue(sizeof($strategies) > 0, "$TAG-1");
     foreach ($strategies as $s) {
         $response = visitNew($s);
-        echo($s);
+     #   echo($s);
         checkNewResponse($response, true, "$TAG-2");
     }
 }

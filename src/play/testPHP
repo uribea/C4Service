@@ -1,5 +1,5 @@
 <?php
-echo "Hello My Friends";
+echo "Hello My HufflePuff Friends";
 if(3>2) {
     echo "YUP";
 }

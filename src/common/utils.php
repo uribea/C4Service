@@ -6,6 +6,8 @@
  * Time: 6:08 PM
  * */
 function storeState($file,$json){
+    $fileo = fopen($file, "w") or die("Unable to open file!");
+
     return True;
 }
 
