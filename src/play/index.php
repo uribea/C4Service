@@ -10,6 +10,9 @@ require_once '../play/Game.php';
 define('PID','pid');
 define('MOVE','move');
 $json = $_GET;
+$response = true;
+#echo $response;
+
 if (!array_key_exists(PID, $json)) {
     $response = false;
     $reason = 'Pid not specified';
@@ -19,20 +22,27 @@ if (!array_key_exists(PID, $json)) {
 }else{
     $pid = $json[PID];
     $mov = $json[MOVE];
-    $file = DATA_DIR . $pid1 . DATA_EXT;
+    $file = DATA_DIR . $pid . DATA_EXT;
+    #echo $file.PHP_EOL.'whygod';
     if ( !file_exists ($file)) {
     $response = false;
+    #echo $pid.PHP_EOL;
+    #echo $file.PHP_EOL;
     $reason = 'Unknown pid';
     }elseif ($mov < 0 || $mov > 6) {
     $response = false;
     $reason = 'Invalid slot, '.$mov;
     }
 }
+#echo 'sad';
 if(!$response){
     //echo json_encode(array(RESPONSE => $response, REASON => $reason ));
     echo createResponse($reason);
     exit;
 }
+#echo'else';
+echo continueResponse($mov);
+/*
 #$file = DATA_DIR . $pid . DATA_EXT;
 $json = file_get_contents($file);
 $game = Game::fromJsonString($json);
@@ -45,7 +55,10 @@ $opponentMove = $game->makeOpponentMove();
 if ($opponentMove->isWin || $opponentMove->isDraw) {
     unlink($file);
     echo owinResponse();
-    exit; }
+    exit;
+}
+//echo '__'.$mov.'__';
+#echo continueResponse($mov);
 storeState($file, $game->toJsonString());
-
+*/
 ?>

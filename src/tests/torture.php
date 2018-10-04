@@ -109,7 +109,7 @@ function testPlay5() {
 /** Test: valid slot. */
 function testPlay6() {
     $response = visitPlay(createGame(), "0");
-    //var_dump($response);
+    var_dump($response);
     checkPlayResponse($response, true, "P6");
 }
 
@@ -239,6 +239,9 @@ function visitPlay($pid = null, $move = null) {
         $query = $query . (strlen($query) > 0 ? '&' : '?');
         $query = $query . 'move=' . $move;
     }
+    echo $query.'_____';
+    echo $home . "/play/index.php" . $query.'||||||||||';
+    echo @file_get_contents($home . "/play/index.php" . $query).'<<<<<<<<<<<<<<<<<<';
     return @file_get_contents($home . "/play/index.php" . $query);
 }
 

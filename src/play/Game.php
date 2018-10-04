@@ -16,6 +16,13 @@ class Game{
         return json_encode();
     }
 
+    function makePlayerMove($x,$y){
+        return true;
+    }
+
+    function makeOpponentMove(){
+        return true;
+    }
     static function fromJsonString($json) {
         $obj = json_decode($json); // instance of stdClass
         $strategy = $obj->{'strategy'};
