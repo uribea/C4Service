@@ -9,33 +9,26 @@ require_once (Board.php);
 
 class Move
 {
-    function update_board($c,$player,$r)//you give a column, row and a player
+    function update_board($c,$player)//you give a column, row and a player
     {
-        if($this->valid_pos(r)==1)
+        if($this->valid_pos(c)==1)
         {
             $board[r*row]=player;
         }
     }
 
-    function valid_pos($r)
+    function valid_pos($c)
     {
-        $result=0;
         //checks if valid position returns 1 if the position is valid else 0
-        for($i=0;$i<42;$i++)
+        for($i=0;$i<7;$i++)
         {
-            if(i==r*col)
+            if(board[$c+1]==0)
             {
-                for($j=0;j<7;$j++)
-                {
-                    if(board[r*col]==0)
-                    {
-                        return $result=1;
-                    }
-                }
-
+               return  1;//valid
             }
+
         }
-        return $result;
+        return 0;//not valid
     }
 
 }
