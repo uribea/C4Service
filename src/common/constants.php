@@ -18,9 +18,9 @@ define('ISDRAW','isDraw');
 define('ROW','row');
 define('COLUMN','column');
 define('MOVE','move');
-
+define('BOARD','board');
 #{"response":true,"ack_move":{"slot":6,"isWin":false,"isDraw":false,"row":[]},"move":{"slot":4,"isWin":false,"isDraw":false,"row":[]}}
 
-$x = 0;
-$y = 0;
+#$x = 0;
+#$y = 0;
 ?>

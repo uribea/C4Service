@@ -14,6 +14,15 @@ function storeState($file,$json){
     return True;
 }
 
+function pwinResponse($slot,$var){
+    $row = [0,0,1,1,2,2,3,3];#getRow();
+#    var_dump($var);
+    #$Move = array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row);
+    $win = $var[isWin];
+ #   echo $win;
+    return json_encode(array(RESPONSE=>true, ACK => array(SLOT => $slot, ISWIN=>$win,ISDRAW=>false, ROW => $row)));
+    #, MOVE => array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row)));
+}
 function createResponse($reason){
     return json_encode(array(RESPONSE => False, REASON => $reason ));
 }

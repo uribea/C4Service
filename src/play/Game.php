@@ -5,8 +5,11 @@
  * Date: 9/28/18
  * Time: 6:08 PM
  */
+require_once '../common/constants.php';
+
 include 'Board.php';
 include 'Move.php';
+include 'checkWinDraw.php';
 
 class Game{
     public $board;
@@ -22,13 +25,30 @@ class Game{
     }
 
     function makePlayerMove($x,$y){
-        $isover = ['isWin','isDraw'];
+        $isover = ['isWin'=>false,'isDraw'=>false];
         #var_dump($y);
         $val = update_board($x,1,$y);
-        $isover->isWin = isWin($val->r,$val->c,$y);
-        #$isover->isDraw = isDraw();
+#        var_dump($val[BOARD]);
+#        echo ' now check boardfor game';
+        $this->board = $val[BOARD];
+ #       var_dump($val['r']);
+        #echo json_encode($this);
+        if (isWin($val[r],$val[c],$val[BOARD]))
+            $isover[isWin] = false;
+        else
+            $isover[isWin] = true;
 
-        return true;
+
+  #      echo 'iswin';
+        #$isover->isDraw = isDraw($val[BOARD]);
+        if (isDraw($val[BOARD]))
+            $isover[isDraw] = false;
+        else
+            $isover[isDraw] = false;
+
+
+   #     var_dump($isover);
+        return $isover;#$isover;
     }
 
     function makeOpponentMove(){

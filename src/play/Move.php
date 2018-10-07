@@ -6,6 +6,7 @@
  * Time: 11:31 AM
  */
 
+require_once '../common/constants.php';
 
 
     function update_board($c,$player,$board)//you give a column, row and a player
@@ -14,11 +15,11 @@
         #$this->valid_pos($c,$board);
         if(($r = valid_pos($c,$board))!=-1)
         {
-            echo $r;
+           # echo $r;
             $board->board[$r][$c]=$player;
-            echo $r.'rc'.$c;
-            var_dump($board);
-            return $var = array('r'=>$r,'c'=>$c);
+          #  echo $r.'rc'.$c;
+         #   var_dump($board);
+            return $var = array('r'=>$r,'c'=>$c, BOARD=>$board);
         }
         return false;
     }

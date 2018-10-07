@@ -49,11 +49,17 @@ $y = $game->board;
 #var_dump($y);
 #echo $x;
 #var_dump($game);
-echo 'atmove';
+#echo 'atmove';
 $playerMove = $game->makePlayerMove($x, $y);
-
+#echo 'd';
+#var_dump($playerMove);
+if ($playerMove['isWin'] || $playerMove['isDraw']) {
+    #unlink($file);
+    echo pwinResponse($x,$playerMove);
+    exit; }
 echo continueResponse($mov);
-/*
+
+    /*
 #$file = DATA_DIR . $pid . DATA_EXT;
 $json = file_get_contents($file);
 $game = Game::fromJsonString($json);
