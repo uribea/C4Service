@@ -41,6 +41,14 @@ if(!$response){
     exit;
 }
 #echo'else';
+$file = DATA_DIR . $pid . DATA_EXT;
+$json2 = file_get_contents($file);
+$game = Game::fromJsonString($json2);
+$x = $json[MOVE];
+#echo $x;
+#var_dump($game);
+$playerMove = $game->makePlayerMove($x, $y);
+
 echo continueResponse($mov);
 /*
 #$file = DATA_DIR . $pid . DATA_EXT;

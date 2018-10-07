@@ -9,7 +9,8 @@
 
 function storeState($file,$json){
     $fileo = fopen($file, "w") or die("Unable to open file!");
-
+    fwrite($fileo, $json);
+    fclose($fileo);
     return True;
 }
 
