@@ -9,6 +9,13 @@ require_once (Board.php);
 
 class Move
 {
+    public $board;
+
+    function  __construct($board)
+    {
+        $this->board;
+    }
+
     function update_board($c,$player)//you give a column, row and a player
     {
         if($this->valid_pos(c)==1)

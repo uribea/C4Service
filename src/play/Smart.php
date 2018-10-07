@@ -8,8 +8,12 @@
 
 class Smart extends Strategy
 {
-    var $move = 0;
-    public $win_array;
+    var $move;
+
+    function  __construct()
+    {
+        $this->move=0;
+    }
 
     function move($board)
     {

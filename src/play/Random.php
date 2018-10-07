@@ -8,16 +8,21 @@
 
 class Random extends Strategy
 {
+    public $col;
+    function  __construct()
+    {
+        $this->col=0;
+    }
 
     function rand_pos($player)
     {
-        $c= rand(0,6);
+        $col= rand(0,6);
         $r=rand(0,5);
-        while ($this->valid_pos($c)==0)
+        while ($this->valid_pos($col)==0)
         {
-            $c=rand(0,7);
+            $col=rand(0,7);
         }
-        $this->update($c,$player,$r);
+        $this->update($col,$player,$r);
     }
     function move($player)
     {

@@ -8,8 +8,12 @@
 include (Board.php);
 class Win
 {
-    public $winners=array("0","0","0","0");
+    public $winners;
 
+    function  __construct()
+    {
+        $this->winners=array_fill(0,4,0);
+    }
     //checks if a slot has connected 5 or not
     function check_win($board)
     {
