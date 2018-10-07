@@ -6,11 +6,13 @@
  * Time: 6:08 PM
  */
 include 'Board.php';
+include 'Move.php';
+
 class Game{
     public $board;
     public $strategy;
 
-    function Game($strategy){
+    function __construct($strategy){
         $this->board = new Board();
         $this->strategy = $strategy;
     }
@@ -20,6 +22,12 @@ class Game{
     }
 
     function makePlayerMove($x,$y){
+        $isover = ['isWin','isDraw'];
+        #var_dump($y);
+        $val = update_board($x,1,$y);
+        $isover->isWin = isWin($val->r,$val->c,$y);
+        #$isover->isDraw = isDraw();
+
         return true;
     }
 

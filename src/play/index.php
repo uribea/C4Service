@@ -7,8 +7,7 @@ require_once '../play/Game.php';
      {"response": false, "reason": "Unknown pid"}
      {"response": false, "reason": "Invalid slot, 10"}
  * */
-define('PID','pid');
-define('MOVE','move');
+
 $json = $_GET;
 $response = true;
 #echo $response;
@@ -45,8 +44,12 @@ $file = DATA_DIR . $pid . DATA_EXT;
 $json2 = file_get_contents($file);
 $game = Game::fromJsonString($json2);
 $x = $json[MOVE];
+
+$y = $game->board;
+#var_dump($y);
 #echo $x;
 #var_dump($game);
+echo 'atmove';
 $playerMove = $game->makePlayerMove($x, $y);
 
 echo continueResponse($mov);

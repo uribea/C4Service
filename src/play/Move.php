@@ -5,37 +5,38 @@
  * Date: 10/2/18
  * Time: 11:31 AM
  */
-require_once (Board.php);
 
-class Move
-{
-    public $board;
 
-    function  __construct($board)
+
+    function update_board($c,$player,$board)//you give a column, row and a player
     {
-        $this->board;
-    }
-
-    function update_board($c,$player)//you give a column, row and a player
-    {
-        if($this->valid_pos(c)==1)
+        #echo 'hi';
+        #$this->valid_pos($c,$board);
+        if(($r = valid_pos($c,$board))!=-1)
         {
-            $board[r*row]=player;
+            echo $r;
+            $board->board[$r][$c]=$player;
+            echo $r.'rc'.$c;
+            var_dump($board);
+            return $var = array('r'=>$r,'c'=>$c);
         }
+        return false;
     }
 
-    function valid_pos($c)
+    function valid_pos($c,$board)
     {
         //checks if valid position returns 1 if the position is valid else 0
-        for($i=0;$i<7;$i++)
+        for($i=0;$i < $board->row;$i++)
         {
-            if(board[$c+1]==0)
+            #echo $board->board[$i][$c];
+#            var_dump($board);
+#            var_dump($board->board[$i]);
+            if($board->board[$i][$c]==0)
             {
-               return  1;//valid
+                #echo $i;
+               return  $i;//valid
             }
 
         }
-        return 0;//not valid
+        return -1;//not valid
     }
-
-}
