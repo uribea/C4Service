@@ -13,19 +13,22 @@ class Smart extends Strategy
 
     function move($board)
     {
-        if ($diag1 = diagonal1() != -1) {
-            $board[$diag1] = 2;
+        for ($i=0;i<42;$i++)
+        {
+            if ($diag1=diagonal_left($i) != -1) {
+                $board[$diag1] = 2;
+            }
+            if ($diag2 = diagonal_right($i) != -1) {
+                $board[$diag2] = 2;
+            }
+            if ($ver = vertical($i) != -1) {
+                $board[$ver] = 2;
+            }
+            if ($hor = horizontal($i) != -1) {
+                $board[$hor] = 2;
+            }
         }
-        if ($diag2 = diagonal2() != -1) {
-            $board[$diag2] = 2;
-        }
-        if ($ver = vertical() != -1) {
-            $board[$ver] = 2;
-        }
-        if ($hor = horizontal() != -1) {
-            $board[$hor] = 2;
-        } else {
-        }
+        $this->rand_pos(2);
     }
 
     //returns position to put the disc if 3 discs and an empty space

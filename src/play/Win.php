@@ -5,9 +5,11 @@
  * Date: 10/1/18
  * Time: 4:53 PM
  */
-require_once (Board.php);
+include (Board.php);
 class Win
 {
+    public $winners=array("0","0","0","0");
+
     //checks if a slot has connected 5 or not
     function check_win($board)
     {
@@ -36,7 +38,13 @@ class Win
 
                     player == board[$position+3])
 
-                {return $player;}
+                {
+                    $winners[0]=$position%7;
+                    $winners[1]=($position+1)%7;
+                    $winners[2]=($position+2)%7;
+                    $winners[3]=($position+3)%7;
+                    return $player;
+                }
 
 				if (floor($position/6) + 2 < $HEIGHT &&//row
                        $player == $board[$position+7] && // look up
@@ -45,7 +53,13 @@ class Win
 
                         $player == $board[$position+21])
 
-                    {return $player;}
+                    {
+                        $winners[0]=($position)%7;
+                        $winners[1]=($position+7)%7;
+                        $winners[2]=($position+14)%7;
+                        $winners[3]=($position+21)%7;
+                        return $player;
+                    }
 
                     if (($position%7) + 2 < $WIDTH &&
 
@@ -55,7 +69,13 @@ class Win
 
                         player == board[$position+24])
 
-                    {return player;}
+                    {
+                        $winners[0]=$position%7;
+                        $winners[1]=($position+8)%7;
+                        $winners[2]=($position+16)%7;
+                        $winners[3]=($position+24)%7;
+                        return player;
+                    }
 
                     if (($position%7) - 2 >= 0 &&
 
@@ -65,19 +85,25 @@ class Win
 
                         player == board[$position+18])
 
-                    { return $player;}
-
-
+                    {
+                        $winners[0]=$position%7;
+                        $winners[1]=($position+6)%7;
+                        $winners[2]=($position+12)%7;
+                        $winners[3]=($position+18)%7;
+                        return $player;
+                    }
 
 			}
-
-
 
 		return $EMPTY_SLOT; // no winner found
 
 
     }
 
+    public function winning_row()
+    {
+        return '$winners';
+    }
 
 
 }
