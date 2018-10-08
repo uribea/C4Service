@@ -11,6 +11,7 @@ include 'Board.php';
 include 'Move.php';
 include 'checkWinDraw.php';
 include 'Random.php';
+include 'Smart.php';
 
 class Game{
     public $board;
@@ -32,12 +33,12 @@ class Game{
       #  var_dump($val[BOARD]);
 #        echo ' now check boardfor game';
         $this->board = $val[BOARD];
-        var_dump($this->board);
-        echo '--------plare-------';
+        #var_dump($this->board);
+        #echo '--------plare-------';
  #       var_dump($val['r']);
         #echo json_encode($this);
         $win = isWin($val[r],$val[c],$val[BOARD]);
-        var_dump($win);
+        #var_dump($win);
         $isover[row] = $win->row;
         if ($win->check)
             $isover[isWin] = true;
@@ -59,11 +60,13 @@ class Game{
 
     function makeOpponentMove(){
         $isover = ['isWin'=>false,'isDraw'=>false, 'row'=>array('')];
-
-
+        echo 'this';
+        var_dump($this);
+        if($this->strategy == 'Smart');
+            $x = smart_mov($this->board);
         $x = rand_pos($this->board);
+        if($this->strategy)
 
-        
 
 
         $val = update_board($x,2,$this->board);

@@ -19,7 +19,7 @@ require_once '../common/constants.php';
             $board->board[$r][$c]=$player;
           #  echo $r.'rc'.$c;
          #   var_dump($board);
-            return $var = array('r'=>$r,'c'=>$c, BOARD=>$board);
+            return array('r'=>$r,'c'=>$c, BOARD=>$board);
         }
         return false;
     }

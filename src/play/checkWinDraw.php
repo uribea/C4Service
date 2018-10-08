@@ -85,7 +85,7 @@
         $player = $board->board[$row][$col];
 #echo 'hidia'.$player;
 #var_dump();
-        for ($i = $tempR; $i >= 0; $i) {
+        for ($i = $tempR; $i >= 0; $i--) {
             if ($board->board[$i][$col]) {
                 if ($board->board[$tempC][$tempR] != $player) {
                     break;

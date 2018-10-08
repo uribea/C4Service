@@ -1,167 +1,125 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: perladelao
- * Date: 9/30/18
- * Time: 10:52 AM
- */
+include 'Random.php';
 
-class Smart extends Strategy
-{
-    var $move;
 
-    function  __construct()
+    function smart_mov($board)
     {
-        $this->move=0;
-    }
 
-    function move($board)
-    {
-        for ($i=0;i<42;$i++)
-        {
-            if ($diag1=diagonal_left($i) != -1) {
-                $board[$diag1] = 2;
-            }
-            if ($diag2 = diagonal_right($i) != -1) {
-                $board[$diag2] = 2;
-            }
-            if ($ver = vertical($i) != -1) {
-                $board[$ver] = 2;
-            }
-            if ($hor = horizontal($i) != -1) {
-                $board[$hor] = 2;
-            }
-        }
-        $this->rand_pos(2);
-    }
+        for ($j=0;$j<6;$i++) {
 
-    //returns position to put the disc if 3 discs and an empty space
-    function diagonal_left($position)//up and left
-    {
-        $spot=0;
-        $empty_spots=0;
-        if (($position%7) - 2 >= 0 ){
-            for ($i = 0; i < 4; $i++) {
-                if (board[$position] == 0) {
-                    $empty_spots++;
-                    $spot = $position + (i * 6);
-                }
-            }
-    }
+            for ($i = 0; $i < 7; $i++) {
 
-
-        if ($empty_spots > 1&& $empty_spots<1) {
-            return -1;
-        }
-
-        return $spot;
-    }
-
-    //returns position to put the disc if 3 discs and an empty space
-    function diagonal_right($position)//up and right
-    {
-        $spot=0;
-        $empty_spots=0;
-        if (($position%7) + 2< 7 )
-            for ($i = 0; i < 4; $i++) {
-                if (board[$position ] == 0) {
-                    $empty_spots++;
-                    if($spot>=7&&board[$spot-7]==0)
-                    {
-                        $spot = $position + (i*8);
+                if($board[$j][$i] == 0) {
+                    if ($diag = diagonal($i, $j, $board) != -1) {
+                        return $i;
                     }
-                    else{
-                        $spot = $position + (i*8);
+
+                    if ($ver = vertical($i, $j, $board) != -1) {
+                        return $i;
                     }
-                }
-            }
-
-
-        if ($empty_spots > 1&& $empty_spots<1) {
-            return -1;
-        }
-
-
-        return $spot;
-    }
-
-    //returns position to put the disc if 3 discs and an empty space
-    function horizontal($position)
-    {
-        $spot = 0;
-        $empty_spots = 0;
-
-        if (($position%7) + 3 < 7) {
-            for ($i = 0; i < 4; $i++) {
-                if (board[$position + i] == 0) {
-                    $empty_spots++;
-                    $spot = $position + i;
-                    if($spot>=7&&board[$spot-7]==0)
-                    {
-                        $spot = $position + (i*8);
-                    }
-                    else{
-                        $spot = $position + (i*8);
-
+                    if ($hor = horizontal($i, $j, $board) != -1) {
+                        return $i;
                     }
                 }
             }
         }
-
-        if ($empty_spots > 1&& $empty_spots<1) {
-            return -1;
-        }
-
-        return $spot;
+        return rand_pos($board);
     }
 
     //returns position to put the disc if 3 discs and an empty space
-    function vertical($position)
+    function diagonal($col,$row,$board)//up and left
     {
-        if (floor($position/6) + 2 < 6)
-        {
-            $spot = 0;
-            $empty_spots = 0;
-            for($i=0;i,4;$i++)
-            {
-                if (board[$position + i] == 0) {
-                    $empty_spots++;
-                    $spot = $position + (i*6);
-                    if($spot>=7&&board[$spot-7]==0)
-                    {
-                        $spot = $position + (i*8);
-                    }
-                    else{
-                        $spot = $position + (i*8);
-
+        $tempR = $row;
+        $tempC = $col;
+        $diagonal = 0;
+        for($player =1 ; $player<3; $player++) {
+            for ($i = $tempR; $i >= 0; $i--) {
+                if ($board->board[$i][$col]) {
+                    if ($board->board[$tempC][$tempR] != $player) {
+                        break;
                     }
                 }
-
+                $tempC++;
+                $diagonal++;
             }
+            for ($i = $tempR; $i < $board->row; $i++) {
+                if ($tempC >= $board->col) {
+                    break;
+                }
+                if ($board->board[$i][$tempC] != $player) {
+                    break;
+                }
+                $tempC++;
+                $diagonal++;
+            }
+            echo $diagonal;
 
+            echo 'diagonal';
+            if ($diagonal == 4) {
+                return $player;
+            }
         }
-        if ($empty_spots > 1&& $empty_spots<1) {
-            return -1;
-        }
-
-        return $spot;
+        #               echo 'diag'.$diagonal;
+        return -1;
     }
 
-    function rand_pos($player)
+
+    //returns position to put the disc if 3 discs and an empty space
+    function horizontal($col,$row,$board)
     {
-        $c= rand(0,6);
-        $r=rand(0,5);
+        $player = $board->board[$row][$col];
+        $horizontal = 0;
 
-        if($this->valid_pos(3))
-        {
-            $this->update_board(7,2);
+        for ($i = $col; $i >= 0; $i--) {
+            if ($board->board[$row][$i] != $player) {
+                break;
+            }
+            $horizontal++;
+
         }
-        while ($this->valid_pos($c)==0)
-        {
-            $c=rand(0,7);
+        for ($trow = $i + 1; $trow < $board->board->col; $trow++) {
+            if ($board->board[$row][$i] != $player) {
+                break;
+            }
+            $horizontal++;
         }
-        $this->update_board($c,2);
+        echo 'horiz';
+        echo  $horizontal;
+        if ($horizontal == 4) {
+            return 0;
+        }
+        echo 'hor';
+#        echo 'hor'.$horizontal;
+        return -1;
     }
 
+    //returns position to put the disc if 3 discs and an empty space
+    function vertical($col,$row,$board)
+    {
+        $player = $board->board[$row][$col];
+        $vertical = 0;
+        #      var_dump($board);
+        #     echo 'xcvbn'.$row.'rc'.$col;
+        for ($i = $row; $i >= 0; $i--) {
+            if ($board->board[$i][$col] != $player) {
+                break;
+            }
+            $vertical++;
+        }
+        #       echo 'ver'.$vertical.'tic';
 
-}
+        for ($i = $row + 1; $i < $board->row; $i++) {
+            if ($board->board[$i][$col] != $player) {
+                break;
+            }
+            $vertical++;
+        }
+        echo 'vertical';
+        echo $vertical;
+        if ($vertical == 4) {
+            return $player;
+        }
+        # echo $vertical;
+        //*/
+        return -1;
+    }
