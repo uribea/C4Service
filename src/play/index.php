@@ -54,11 +54,16 @@ $playerMove = $game->makePlayerMove($x, $y);
 #echo 'd';
 #var_dump($playerMove);
 if ($playerMove['isWin'] || $playerMove['isDraw']) {
-    #unlink($file);
+    unlink($file);
     echo pwinResponse($x,$playerMove);
     exit; }
-echo continueResponse($mov);
-
+$opponentMove = $game->makeOpponentMove();
+/*if ($opponentMove['isWin']  || $opponentMove['isDraw']) {
+    unlink($file);
+    echo owinResponse();
+    exit;
+*/echo continueResponse($mov);
+storeState($file, $game->toJsonString());
     /*
 #$file = DATA_DIR . $pid . DATA_EXT;
 $json = file_get_contents($file);

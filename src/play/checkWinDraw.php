@@ -4,7 +4,8 @@
       #  var_dump($row);
        # echo "chrck strt";
         $player = detectVertical($row, $col,$board);
-    #   echo $player;
+       echo 'player';
+       var_dump($player);
         if($player != 0) {
             return true;
         };
@@ -23,21 +24,27 @@
     {
         $player = $board->board[$row][$col];
         $horizontal = 0;
+        $wrow = [];
+
         for ($i = $col; $i >= 0; $i--) {
             if ($board->board[$row][$i] != $player) {
                 break;
             }
             $horizontal++;
+           array_push($wrow,$row,$i);
         }
         for ($trow = $i + 1; $trow < $board->board->col; $trow++) {
             if ($board->board[$row][$i] != $player) {
                 break;
             }
             $horizontal++;
+            array_push($wrow,$row,$i);
         }
         if ($horizontal == 4) {
-            return $player;
+            return $wrow;
         }
+        echo 'wrow';
+        var_dump($wrow);
 #        echo 'hor'.$horizontal;
         return 0;
     }

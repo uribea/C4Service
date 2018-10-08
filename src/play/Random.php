@@ -1,32 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: perladelao
- * Date: 9/30/18
- * Time: 10:52 AM
- */
 
-class Random extends Strategy
-{
-    public $col;
-    function  __construct()
-    {
-        $this->col=0;
-    }
 
-    function rand_pos($player)
-    {
-        $col= rand(0,6);
-        $r=rand(0,5);
-        while ($this->valid_pos($col)==0)
-        {
-            $col=rand(0,7);
-        }
-        $this->update($col,$player,$r);
-    }
-    function move($player)
-    {
-        rand_pos($player);
-    }
 
-}
+
+
+    function rand_pos($board)
+    {
+
+        $col = mt_rand(0, 6);
+        echo "collll".$col;
+        var_dump($board->row);
+        if ($board->board[($board->row) - 1][$col] == 0)
+            return $col;
+        $col = rand_pos($board);
+        return $col;
+    }
