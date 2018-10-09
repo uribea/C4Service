@@ -41,28 +41,12 @@ if ($playerMove['isWin'] || $playerMove['isDraw']) {
     unlink($file);
     echo pwinResponse($x,$playerMove);
     exit; }
-$opponentMove = $game->makeOpponentMove();
+$opponentMove = $game->makeOpponentMove($mov);
 if ($opponentMove['isWin']  || $opponentMove['isDraw']) {
     unlink($file);
     echo owinResponse($mov,$opponentMove);
     exit;}
 echo continueResponse($mov,$opponentMove['x']);
 storeState($file, $game->toJsonString());
-    /*
-#$file = DATA_DIR . $pid . DATA_EXT;
-$json = file_get_contents($file);
-$game = Game::fromJsonString($json);
-$playerMove = $game->makePlayerMove($x, $y);
-if ($playerMove->isWin || $playerMove->isDraw) {
-    unlink($file);
-    echo pwinResponse();
-    exit; }
-$opponentMove = $game->makeOpponentMove();
-if ($opponentMove->isWin || $opponentMove->isDraw) {
-    unlink($file);
-    echo owinResponse();
-    exit;
-}
-storeState($file, $game->toJsonString());
-*/
+
 ?>

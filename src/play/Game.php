@@ -11,7 +11,7 @@ include 'Board.php';
 include 'Move.php';
 include 'checkWinDraw.php';
 include 'Random.php';
-#include 'Smart.php';
+include 'Smart.php';
 
 class Game{
     public $board;
@@ -35,14 +35,14 @@ class Game{
       #  var_dump($val[BOARD]);
 #        echo ' now check boardfor game';
         $this->board = $val[BOARD];
-        #var_dump($this->board);
-        #echo '--------plare-------';
- #       var_dump($val['r']);
-        #echo json_encode($this);
+
+        #var_dump($val[c]);
         $win = isWin($val[r],$val[c],$val[BOARD]);
         #var_dump($win);
-        $isover[row] = $win->row;
-        if ($win->check)
+        #var_dump($win);
+        $isover[row] = $win[0];
+        #var_dump($isover);
+        if ($win[0])
             $isover[isWin] = true;
         else
             $isover[isWin] = false;
@@ -59,14 +59,14 @@ class Game{
         return $isover;#$isover;
     }
 
-    function makeOpponentMove(){
+    function makeOpponentMove($pl){
         $isover = ['isWin'=>false,'isDraw'=>false, 'row'=>array(),'x'=>0];
         #echo 'this';
         #var_dump($this);
         #echo 'by;';
         $x = 0;
-        if($this->strategy == 'Smart');
-            #$x = smart_mov($this->board);
+        if($this->strategy == 'Smart')
+            $x = smart_mov($pl,$this->board);
         else
             $x = rand_pos($this->board);
         #if($this->strategy)
@@ -75,13 +75,16 @@ class Game{
 
         #echo $x.'new';
         #var_dump($isover);
-        if (isWin($this->board))
+
+        #echo 'hi';
+        $val = update_board($x,2,$this->board);
+        $win = isWin($val[r],$val[c],$val[BOARD]);
+        $isover[row] = $win->row;
+        if ($win->check)
             $isover[isWin] = true;
         else
             $isover[isWin] = false;
 
-        #echo 'hi';
-        $val = update_board($x,2,$this->board);
         if (isDraw($this->board))
             $isover[isDraw] = true;
         else

@@ -21,7 +21,7 @@ require_once '../common/constants.php';
          #   var_dump($board);
             return array('r'=>$r,'c'=>$c, BOARD=>$board);
         }
-        return false;
+        return array('r'=>$r,'c'=>$c, BOARD=>$board);
     }
 
     function valid_pos($c,$board)

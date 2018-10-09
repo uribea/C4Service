@@ -3,19 +3,19 @@
     {
 
         $player = detectVertical($row, $col,$board);
-
-        if($player != 0) {
-            return true;
+        #var_dump($player[0]);
+        if($player[0]!= 0) {
+            return array(true,$player[1]);
         };
         $player =  detectHorizontal($row, $col,$board);
-        if($player != 0){
-            return true;
+        if($player[0] != 0){
+            return array(true,$player[1]);
         }
         $player = detectDiagonal($row, $col,$board);
-        if($player !=0){
-            return true ;
+        if($player[0] !=0){
+            return array(true,$player[1]);
         }
-        return false;
+        return array(false,array());
     }
 
     function detectHorizontal($row, $col,$board)
@@ -29,23 +29,25 @@
                 break;
             }
             $horizontal++;
-           array_push($wrow,$row,$i);
+           array_push($wrow,$i,$col);
         }
-        for ($trow = $i + 1; $trow < $board->board->col; $trow++) {
+        for ($i = $col + 1; $i < 7; $i++) {
             if ($board->board[$row][$i] != $player) {
+                #var_dump();
                 break;
             }
             $horizontal++;
-            array_push($wrow,$row,$i);
+            array_push($wrow,$i,$col);
         }
-        if ($horizontal == 4) {
-            return $wrow;
+        if ($horizontal > 3) {
+            return array(1,$wrow);
         }
-        return 0;
+        return array(0,array());
     }
 
     function detectVertical($row, $col,$board)
     {
+        $wrow = [];
         $player = $board->board[$row][$col];
         $vertical = 0;
         for ($i = $row; $i >= 0; $i--) {
@@ -53,22 +55,21 @@
                 break;
             }
             $vertical++;
-        }
-        for ($i = $row + 1; $i < $board->row; $i++) {
-            if ($board->board[$i][$col] != $player) {
-                break;
-            }
-            $vertical++;
-        }
-        if ($vertical == 4) {
-            return $player;
+            array_push($wrow,$row,$i);
+
         }
 
-        return 0;
+        if ($vertical == 4) {
+            return array(1,$wrow);
+        }
+
+        return array(0,array());
     }
 
     function detectDiagonal($row, $col,$board)
     {
+        $wrow = [];
+
         $tempR = $row;
         $tempC = $col;
         $diagonal = 0;
@@ -80,23 +81,27 @@
                     break;
                 }
             }
+            $tempC--;
+            $diagonal++;
+            array_push($wrow,$row,$i);
+
+        }
+        for ($i = $tempR; $i < $board->row; $i++) {
+            if ($tempC >= $board->col) {
+                break;
+            }
+            if ($board->board[$i][$tempC] != $player) {
+                break;
+            }
             $tempC++;
             $diagonal++;
+            array_push($wrow,$tempR,$tempC);
+
         }
-                for ($i = $tempR; $i < $board->row; $i++) {
-                    if ($tempC >= $board->col) {
-                        break;
-                    }
-                    if ($board->board[$i][$tempC] != $player) {
-                        break;
-                    }
-                    $tempC++;
-                    $diagonal++;
-                }
-                if ($diagonal == 4) {
-                    return $player;
-                }
-        return 0;
+        if ($diagonal > 3) {
+            return array(1,$wrow);
+        }
+        return array(0,array());
     }
     function isDraw($board){
         $tempR = $board->row;
