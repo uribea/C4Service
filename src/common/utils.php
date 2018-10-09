@@ -18,20 +18,21 @@ function pwinResponse($slot,$var){
     $row = [0,0,1,1,2,2,3,3];#getRow();
 #    var_dump($var);
     #$Move = array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row);
-    $win = $var[isWin];
- #   echo $win;
-    return json_encode(array(RESPONSE=>true, ACK => array(SLOT => $slot, ISWIN=>$win,ISDRAW=>false, ROW => $row)));
+    $win = $var['isWin'];
+    $draw  = $var['isDraw']; #   echo $win;
+    return json_encode(array(RESPONSE=>true, ACK => array(SLOT => $slot, ISWIN=>$win,ISDRAW=>$draw, ROW => $row)));
     #, MOVE => array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row)));
 }
 
 
-function owinResponse($slot,$var){
+function owinResponse($mov,$var){
     $row = [0,0,1,1,2,2,3,3];#getRow();
 #    var_dump($var);
     #$Move = array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row);
-    $win = $var[isWin];
+    $win = $var['isWin'];
+    $draw  = $var['isDraw'];
     #   echo $win;
-    return json_encode(array(RESPONSE=>true, ACK => array(SLOT => $slot, ISWIN=>$win,ISDRAW=>false, ROW => $row)));
+    return json_encode(array(RESPONSE=>true, ACK => array(SLOT => $mov, ISWIN=>$win,ISDRAW=>$draw, ROW => $row)));
     #, MOVE => array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row)));
 }
 
@@ -43,11 +44,11 @@ function getRow(){
     return $row = [];
 }
 
-function continueResponse($slot){
+function continueResponse($slot,$resp){
     $row = getRow();
     #$Move = array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row);
     return json_encode(array(RESPONSE=>true, ACK => array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row),
-        MOVE => array(SLOT => $slot, ISWIN=>false,ISDRAW=>false, ROW => $row)));
+        MOVE => array(SLOT => $resp, ISWIN=>false,ISDRAW=>false, ROW => $row)));
 }
 #function #{"response":true,"ack_move":{"slot":6,"isWin":false,"isDraw":false,"row":[]},"move":{"slot":4,"isWin":false,"isDraw":false,"row":[]}}
 ?>

@@ -1,11 +1,9 @@
 <?php
     function isWin($row, $col,$board)
     {
-      #  var_dump($row);
-       # echo "chrck strt";
+
         $player = detectVertical($row, $col,$board);
-       echo 'player';
-       var_dump($player);
+
         if($player != 0) {
             return true;
         };
@@ -43,9 +41,6 @@
         if ($horizontal == 4) {
             return $wrow;
         }
-        echo 'wrow';
-        var_dump($wrow);
-#        echo 'hor'.$horizontal;
         return 0;
     }
 
@@ -53,16 +48,12 @@
     {
         $player = $board->board[$row][$col];
         $vertical = 0;
-  #      var_dump($board);
-   #     echo 'xcvbn'.$row.'rc'.$col;
         for ($i = $row; $i >= 0; $i--) {
             if ($board->board[$i][$col] != $player) {
                 break;
             }
             $vertical++;
         }
- #       echo 'ver'.$vertical.'tic';
-
         for ($i = $row + 1; $i < $board->row; $i++) {
             if ($board->board[$i][$col] != $player) {
                 break;
@@ -72,8 +63,7 @@
         if ($vertical == 4) {
             return $player;
         }
-       # echo $vertical;
-        //*/
+
         return 0;
     }
 
@@ -83,8 +73,7 @@
         $tempC = $col;
         $diagonal = 0;
         $player = $board->board[$row][$col];
-#echo 'hidia'.$player;
-#var_dump();
+
         for ($i = $tempR; $i >= 0; $i--) {
             if ($board->board[$i][$col]) {
                 if ($board->board[$tempC][$tempR] != $player) {
@@ -107,17 +96,13 @@
                 if ($diagonal == 4) {
                     return $player;
                 }
- #               echo 'diag'.$diagonal;
         return 0;
     }
     function isDraw($board){
-#        var_dump($board);
         $tempR = $board->row;
         $tempC = $board->col;
-        #echo $tempR.'rc.'.$tempC;
         for ($i = 0; $i<$tempC;$i++) {
             if ($board->board[$tempR - 1][$i] == 0)
-  #                          echo 'false';
                 return false;
         }
         return true;
